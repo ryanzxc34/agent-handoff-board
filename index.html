@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Handoff Board · Multi-Agent Lab</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <header class="top">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">⬡</div>
+      <div>
+        <h1>Agent Handoff Board</h1>
+        <p class="tag">Multi-Agent Lab · plan who does what before you spawn bots</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="themeBtn" class="ghost" type="button" title="Toggle theme">◐ Theme</button>
+      <button id="resetBtn" class="ghost" type="button">Reset demo</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel compose">
+      <h2>New task</h2>
+      <form id="taskForm">
+        <label>
+          Goal
+          <textarea id="goal" rows="3" required placeholder="e.g. Scrape tonight’s MLH livestream schedule and draft a Slack summary"></textarea>
+        </label>
+        <div class="row">
+          <label>
+            Primary agent
+            <select id="agent" required>
+              <option value="Researcher">Researcher</option>
+              <option value="Builder">Builder</option>
+              <option value="Reviewer">Reviewer</option>
+              <option value="Publisher">Publisher</option>
+            </select>
+          </label>
+          <label>
+            Priority
+            <select id="priority">
+              <option value="P0">P0 · urgent</option>
+              <option value="P1" selected>P1 · today</option>
+              <option value="P2">P2 · backlog</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          Handoff notes
+          <input id="notes" type="text" placeholder="What the next agent needs (paths, constraints, done-when)" />
+        </label>
+        <button type="submit" class="primary">Add to board</button>
+      </form>
+      <p class="hint">No API keys. Everything stays in this browser (localStorage).</p>
+    </section>
+
+    <section class="panel board-wrap">
+      <div class="board-header">
+        <h2>Board</h2>
+        <div class="stats" id="stats"></div>
+      </div>
+      <div class="board" id="board">
+        <div class="col" data-status="queued">
+          <h3>Queued</h3>
+          <div class="cards" id="col-queued"></div>
+        </div>
+        <div class="col" data-status="running">
+          <h3>Running</h3>
+          <div class="cards" id="col-running"></div>
+        </div>
+        <div class="col" data-status="handoff">
+          <h3>Handoff</h3>
+          <div class="cards" id="col-handoff"></div>
+        </div>
+        <div class="col" data-status="done">
+          <h3>Done</h3>
+          <div class="cards" id="col-done"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>GHW Builders Week · Challenge 1 mini app</span>
+    <span id="clock"></span>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
